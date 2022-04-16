@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MarsPatrol</string>
+    <string name="internet_connection_message">Failed to upload photo</string>
+    <string name="retry_button">Retry</string>
+    <string name="photoday_fragment_from">From</string>
+    <string name="photoday_fragment_to">To</string>
+    <string name="photoday_fragment_show">Show</string>
+    <string name="photoday_fragment_error_1">Date \"From\" must be less than \"To\"</string>
+    <string name="photoday_fragment_error_2">Date \"From\" must be no more than 6 months</string>
+    <string name="photoday_fragment_error_3">The field must be filled</string>
+    <string name="photoday_fragment_error_4">The date is greater than today\'s date</string>
 </resources>

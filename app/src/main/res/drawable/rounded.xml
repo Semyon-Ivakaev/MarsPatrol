@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/bottom_calendar"/>
+    <corners android:topLeftRadius="40dp" android:topRightRadius="40dp"/>
+    <gradient
+        android:angle="0"
+        android:centerColor="#F2A8A8A8"
+        android:startColor="#F2A8A8A8"
+        android:endColor="#F2A8A8A8"
+         />
+</shape>

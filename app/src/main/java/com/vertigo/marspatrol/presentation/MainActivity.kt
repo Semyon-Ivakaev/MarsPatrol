@@ -1,7 +1,8 @@
-package com.vertigo.marspatrol
+package com.vertigo.marspatrol.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vertigo.marspatrol.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

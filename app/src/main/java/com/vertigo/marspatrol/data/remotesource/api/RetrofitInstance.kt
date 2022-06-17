@@ -1,6 +1,5 @@
 package com.vertigo.marspatrol.data.remotesource.api
 
-import com.vertigo.marspatrol.data.remotesource.model.MarsPhoto
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -21,5 +20,5 @@ object RetrofitInstance {
         .client(client)
         .build()
 
-    val marsRoverRetrofitApiService: MarsPhoto = marsRoverRetrofit.create(MarsPhoto::class.java)
+    val marsRoverRetrofitApiService: MarsRoverApiService = marsRoverRetrofit.create(MarsRoverApiService::class.java)
 }

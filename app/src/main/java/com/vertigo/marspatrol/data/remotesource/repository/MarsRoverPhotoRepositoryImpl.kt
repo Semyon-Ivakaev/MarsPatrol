@@ -1,6 +1,7 @@
 package com.vertigo.marspatrol.data.remotesource.repository
 
 import com.vertigo.marspatrol.data.remotesource.api.RetrofitInstance
+import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import com.vertigo.marspatrol.domain.repository.MarsRoverPhotoRepository
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +12,7 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
 
     private val retrofitApi = RetrofitInstance.marsRoverRetrofitApiService
 
-    override suspend fun getDefaultPhotoList(sol: String, roverName: String): List<MarsPhoto> {
+    override suspend fun getDefaultPhotoList(sol: String, roverName: String): ApiResponse<List<MarsPhoto>> {
         val resultList = arrayListOf<MarsPhoto>()
         try {
             withContext(Dispatchers.Default) {
@@ -27,11 +28,13 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
                 )
                 }
             }
-        } catch (ex: Exception) {}
-        return resultList
+            return ApiResponse.Success(resultList)
+        } catch (ex: Exception) {
+            return ApiResponse.Error(exception = ex)
+        }
     }
 
-    override suspend fun getNeedPhotoList(data: String, roverName: String): List<MarsPhoto> {
+    override suspend fun getNeedPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>> {
         val resultList = arrayListOf<MarsPhoto>()
         try {
             withContext(Dispatchers.Default) {
@@ -47,7 +50,9 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
                     )
                 }
             }
-        } catch (ex: java.lang.Exception) {}
-        return resultList
+            return ApiResponse.Success(resultList)
+        } catch (ex: java.lang.Exception) {
+            return ApiResponse.Error(exception = ex)
+        }
     }
 }

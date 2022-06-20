@@ -13,7 +13,7 @@ interface MarsRoverApiService {
         @Query("sol")
         sol: String,
         @Query("api_key")
-        key: String): List<MarsApiPhoto>
+        key: String): MarsApiPhoto
 
     @GET("mars-photos/api/v1/rovers/{rover_name}/photos?")
     suspend fun getNeededMarsRoverPhotos(
@@ -22,5 +22,5 @@ interface MarsRoverApiService {
         @Query("earth_date")
         earth_date: String,
         @Query("api_key")
-        key: String): List<MarsApiPhoto>
+        key: String): MarsApiPhoto
 }

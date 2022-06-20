@@ -1,5 +1,6 @@
 package com.vertigo.marspatrol.data.remotesource.repository
 
+import android.util.Log
 import com.vertigo.marspatrol.data.remotesource.api.RetrofitInstance
 import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.MarsPhoto
@@ -16,13 +17,13 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
         val resultList = arrayListOf<MarsPhoto>()
         try {
             withContext(Dispatchers.Default) {
-                retrofitApi.getDefaultMarsRoverPhotos(sol = sol, roverName = roverName, key = api_key).map {
+                retrofitApi.getDefaultMarsRoverPhotos(sol = sol, roverName = roverName, key = api_key).photos.map {
                     result -> resultList.add(
                     MarsPhoto(
                         sol = result.sol,
                         earth_date = result.earth_date,
-                        camera_name = result.full_name,
-                        rover_name = result.name,
+                        camera_name = result.camera.full_name,
+                        rover_name = result.rover.name,
                         img_url = result.img_src
                     )
                 )
@@ -38,13 +39,13 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
         val resultList = arrayListOf<MarsPhoto>()
         try {
             withContext(Dispatchers.Default) {
-                retrofitApi.getNeededMarsRoverPhotos(roverName = roverName, earth_date = data, key = api_key).map {
+                retrofitApi.getNeededMarsRoverPhotos(roverName = roverName, earth_date = data, key = api_key).photos.map {
                     result -> resultList.add(
                     MarsPhoto(
                         sol = result.sol,
                         earth_date = result.earth_date,
-                        camera_name = result.full_name,
-                        rover_name = result.name,
+                        camera_name = result.camera.full_name,
+                        rover_name = result.rover.name,
                         img_url = result.img_src
                     )
                     )

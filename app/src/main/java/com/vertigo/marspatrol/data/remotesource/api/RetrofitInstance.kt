@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+
     private val client = OkHttpClient.Builder()
         .readTimeout(30, TimeUnit.SECONDS)
         .connectTimeout(30, TimeUnit.SECONDS)

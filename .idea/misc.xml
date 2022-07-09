@@ -7,11 +7,13 @@
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_baseline_date_range_24.xml" value="0.28307692307692306" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.28307692307692306" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_calendar.xml" value="0.2601851851851852" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_filter.xml" value="0.18" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/replay_arrow.xml" value="0.28307692307692306" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/rounded.xml" value="0.28307692307692306" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/activity_main.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_mars_rover.xml" value="0.25" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/item_mars_rover.xml" value="0.18" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/menu/filter_menu.xml" value="0.33" />
       </map>
     </option>
   </component>

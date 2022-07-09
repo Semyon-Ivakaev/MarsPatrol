@@ -17,9 +17,12 @@ class MarsRoverPhotoViewModel(
 
     private val _marsRoverPhotos: MutableLiveData<List<MarsPhoto>?> = MutableLiveData()
     val marsRoverPhotos: LiveData<List<MarsPhoto>?> get() = _marsRoverPhotos
+    private val _marsRoverTitle: MutableLiveData<String> = MutableLiveData()
+    val marsRoverTitle: LiveData<String> get() = _marsRoverTitle
 
     init {
         getPhotoList()
+        _marsRoverTitle.value = "Curiosity"
     }
 
     private fun getPhotoList() {
@@ -34,6 +37,24 @@ class MarsRoverPhotoViewModel(
                 }
             }
         }
+    }
+
+    fun getNeededMarsPhotoList(roverName: String) {
+        viewModelScope.launch {
+            val loadResult = getNeededMatsPhotoListUseCase.execute("2022-07-07", roverName = roverName)
+            when(loadResult) {
+                is ApiResponse.Success -> {
+                    _marsRoverPhotos.postValue((loadResult.data))
+                }
+                is ApiResponse.Error -> {
+                    Log.e("App", "Error")
+                }
+            }
+        }
+    }
+
+    fun setMarsRoverTitle(title: String) {
+        _marsRoverTitle.value = title
     }
 
 

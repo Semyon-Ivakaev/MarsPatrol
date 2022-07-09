@@ -53,8 +53,8 @@
         app:layout_constraintEnd_toStartOf="@id/calendar_button"
         app:layout_constraintBottom_toTopOf="@id/title_barrier"
         android:gravity="center_horizontal"
-        android:text="Curiosity"
-        android:textSize="20dp"/>
+        android:text="@string/name_curiosity"
+        android:textSize="20sp"/>
 
     <ImageButton
         android:id="@+id/calendar_button"
@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintBottom_toTopOf="@+id/title_barrier"
         android:src="@drawable/ic_calendar"
-        android:background="@drawable/calendar_background"/>
+        android:background="@drawable/calendar_background" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/title_barrier"

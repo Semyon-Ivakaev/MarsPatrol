@@ -3,9 +3,7 @@ package com.vertigo.marspatrol.presentation.fragments.marsroverphoto
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.PopupMenu
 import androidx.appcompat.widget.CustomPopupMenu
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vertigo.marspatrol.R
 import com.vertigo.marspatrol.databinding.FragmentMarsRoverBinding
 import com.vertigo.marspatrol.domain.model.MarsPhoto
+import com.vertigo.marspatrol.presentation.App
 import com.vertigo.marspatrol.presentation.adapters.MarsRoverPhotoAdapter
 
 class FragmentMarsRoverPhoto: Fragment() {
@@ -85,20 +84,18 @@ class FragmentMarsRoverPhoto: Fragment() {
         popup.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.Curiosity -> {
-                    marsRoverPhotoViewModel.getNeededMarsPhotoList("Curiosity")
+                    marsRoverPhotoViewModel.getNeededMarsPhotoList(roverName = App.NAME_CURIOSITY)
                     showProgressBar(show = true)
                     clearRecycler()
-                    setTitle("Curiosity")
-                    marsRoverPhotoViewModel.setMarsRoverTitle("Curiosity")
+                    setTitle(roverName = App.NAME_CURIOSITY)
+                    marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_CURIOSITY)
                 }
                 else -> {
-                    marsRoverPhotoViewModel.getNeededMarsPhotoList("Perseverance")
+                    marsRoverPhotoViewModel.getNeededMarsPhotoList(roverName = App.NAME_PERSEVERANCE)
                     showProgressBar(show = true)
                     clearRecycler()
-                    setTitle("Perseverance")
-                    marsRoverPhotoViewModel.setMarsRoverTitle("Perseverance")
-                    popup.menu.findItem(R.id.Perseverance).setIcon(R.drawable.ic_rover_true)
-                    popup.menu.findItem(R.id.Curiosity).setIcon(R.drawable.ic_rover_false)
+                    setTitle(roverName = App.NAME_PERSEVERANCE)
+                    marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_PERSEVERANCE)
                 }
             }
             true
@@ -107,7 +104,7 @@ class FragmentMarsRoverPhoto: Fragment() {
     }
 
     private fun setIconMenu(popup: CustomPopupMenu) {
-        if (marsRoverPhotoViewModel.marsRoverTitle.value == "Curiosity") {
+        if (marsRoverPhotoViewModel.marsRoverTitle.value == App.NAME_CURIOSITY) {
             popup.menu.findItem(R.id.Perseverance).setIcon(R.drawable.ic_rover_false)
             popup.menu.findItem(R.id.Curiosity).setIcon(R.drawable.ic_rover_true)
         } else {

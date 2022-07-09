@@ -9,6 +9,7 @@ import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetDefaultMarsPhotoListUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetNeededMatsPhotoListUseCase
+import com.vertigo.marspatrol.presentation.App
 import kotlinx.coroutines.launch
 
 class MarsRoverPhotoViewModel(
@@ -22,7 +23,7 @@ class MarsRoverPhotoViewModel(
 
     init {
         getPhotoList()
-        _marsRoverTitle.value = "Curiosity"
+        _marsRoverTitle.value = App.NAME_CURIOSITY
     }
 
     private fun getPhotoList() {

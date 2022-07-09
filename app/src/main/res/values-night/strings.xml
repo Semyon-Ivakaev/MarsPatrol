@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MarsPatrol</string>
     <string name="internet_connection_message">Failed to upload photo</string>

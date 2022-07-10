@@ -39,6 +39,7 @@ class FragmentMarsRoverPhoto: Fragment() {
 
         initViews()
         createRecycler()
+        //initPullToRefresh()
 
         marsRoverPhotoViewModel = ViewModelProvider(this, MarsRoverViewModelFactory())[MarsRoverPhotoViewModel::class.java]
 
@@ -77,6 +78,17 @@ class FragmentMarsRoverPhoto: Fragment() {
             }
             calendarButton.setOnClickListener {
                 showDatePickerDialog()
+            }
+        }
+    }
+
+    private fun initPullToRefresh() {
+        with(binding) {
+            swipeRefresh.setOnRefreshListener {
+                clearRecycler()
+                showProgressBar(show = true)
+                marsRoverPhotoViewModel.getNeededMarsPhotoList()
+                swipeRefresh.isRefreshing = false
             }
         }
     }
@@ -150,6 +162,7 @@ class FragmentMarsRoverPhoto: Fragment() {
                 dateDialogFragment = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener{
                         _, mYear, mMonth, mDay ->
                     marsRoverPhotoViewModel.setDateForCalendar(day = mDay, month = mMonth, year = mYear)
+                    showProgressBar(show = true)
                     marsRoverPhotoViewModel.getNeededMarsPhotoList()
                 }, result.year, result.month - 1, result.day)
 

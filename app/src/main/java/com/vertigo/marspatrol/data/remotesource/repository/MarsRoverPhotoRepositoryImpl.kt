@@ -3,7 +3,9 @@ package com.vertigo.marspatrol.data.remotesource.repository
 import android.util.Log
 import com.vertigo.marspatrol.data.remotesource.api.RetrofitInstance
 import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
+import com.vertigo.marspatrol.domain.model.Camera
 import com.vertigo.marspatrol.domain.model.MarsPhoto
+import com.vertigo.marspatrol.domain.model.MarsRover
 import com.vertigo.marspatrol.domain.repository.MarsRoverPhotoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -53,6 +55,32 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
             }
             return ApiResponse.Success(resultList)
         } catch (ex: java.lang.Exception) {
+            return ApiResponse.Error(exception = ex)
+        }
+    }
+
+    override suspend fun getDefaultSolForMarsRover(roverName: String): ApiResponse<MarsRover?> {
+        var result: MarsRover? = null
+        try {
+            withContext(Dispatchers.Default) {
+                val cameraList = arrayListOf<Camera>()
+                val response = retrofitApi.getDefaultSolForMarsRover(roverName = roverName, key = api_key).rover
+                Log.v("App", response.toString())
+                response.cameras.map {
+                    camera -> cameraList.add(
+                        Camera(
+                            name = camera.camera_name, full_name = camera.full_name
+                        ))
+                }
+
+                result = MarsRover(
+                    id = response.id, name = response.name, landing_date = response.landing_date, launch_date = response.launch_date,
+                    status = response.status, max_sol = response.max_sol, max_date = response.max_date, total_photos = response.total_photos,
+                    cameras = cameraList
+                )
+            }
+            return ApiResponse.Success(data = result)
+        } catch (ex: Exception) {
             return ApiResponse.Error(exception = ex)
         }
     }

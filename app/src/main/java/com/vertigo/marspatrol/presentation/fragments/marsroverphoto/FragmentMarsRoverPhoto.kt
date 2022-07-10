@@ -39,7 +39,7 @@ class FragmentMarsRoverPhoto: Fragment() {
 
         initViews()
         createRecycler()
-        //initPullToRefresh()
+        initPullToRefresh()
 
         marsRoverPhotoViewModel = ViewModelProvider(this, MarsRoverViewModelFactory())[MarsRoverPhotoViewModel::class.java]
 
@@ -48,6 +48,11 @@ class FragmentMarsRoverPhoto: Fragment() {
                 updateRecycler(result)
                 showProgressBar(false)
         })
+
+        marsRoverPhotoViewModel.marsRoverDate.observe(viewLifecycleOwner, {
+            marsRoverPhotoViewModel.getNeededMarsPhotoList()
+        })
+
         return view
     }
 
@@ -163,8 +168,7 @@ class FragmentMarsRoverPhoto: Fragment() {
                         _, mYear, mMonth, mDay ->
                     marsRoverPhotoViewModel.setDateForCalendar(day = mDay, month = mMonth, year = mYear)
                     showProgressBar(show = true)
-                    marsRoverPhotoViewModel.getNeededMarsPhotoList()
-                }, result.year, result.month - 1, result.day)
+                }, result.year.toInt(), result.month.toInt() - 1, result.day.toInt())
 
         })
         dateDialogFragment?.show()

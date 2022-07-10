@@ -9,6 +9,7 @@ import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.MarsDatePicker
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetDefaultMarsPhotoListUseCase
+import com.vertigo.marspatrol.domain.usecase.marsphoto.GetDefaultSolForMarsRoverUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetNeededMatsPhotoListUseCase
 import com.vertigo.marspatrol.presentation.App
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ import java.util.*
 
 class MarsRoverPhotoViewModel(
     private val getDefaultMarsPhotoListUseCase: GetDefaultMarsPhotoListUseCase,
-    private val getNeededMatsPhotoListUseCase: GetNeededMatsPhotoListUseCase): ViewModel() {
+    private val getNeededMatsPhotoListUseCase: GetNeededMatsPhotoListUseCase,
+    private val getDefaultSolForMarsRoverUseCase: GetDefaultSolForMarsRoverUseCase): ViewModel() {
 
     private val _marsRoverPhotos: MutableLiveData<List<MarsPhoto>?> = MutableLiveData()
     val marsRoverPhotos: LiveData<List<MarsPhoto>?> get() = _marsRoverPhotos
@@ -27,20 +29,23 @@ class MarsRoverPhotoViewModel(
 
     init {
         _marsRoverTitle.value = App.NAME_CURIOSITY
-        getDefaultPhotoList()
-        initDateForCalendar()
+        getDefaultMarsRoverSol()
     }
 
-    private fun getDefaultPhotoList() {
+    private fun getDefaultMarsRoverSol() {
         viewModelScope.launch {
-            val loadResult =
-                _marsRoverTitle.value?.let { getDefaultMarsPhotoListUseCase.execute("424", it) }
+            val loadResult = _marsRoverTitle.value?.let {
+                getDefaultSolForMarsRoverUseCase.execute(
+                    it
+                )
+            }
             when (loadResult) {
                 is ApiResponse.Success -> {
-                    _marsRoverPhotos.postValue(loadResult.data)
+                    loadResult.data?.max_date?.let {
+                        _marsRoverDate.postValue(convertStringDataToObject(it)) }
                 }
                 is ApiResponse.Error -> {
-                    Log.e("App", "Error")
+                    Log.e("App", "Error1")
                 }
             }
         }
@@ -69,15 +74,15 @@ class MarsRoverPhotoViewModel(
         _marsRoverTitle.value = title
     }
 
-    private fun initDateForCalendar() {
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        _marsRoverDate.value = MarsDatePicker(day, month + 1, year)
+    fun setDateForCalendar(day: Int, month: Int, year: Int) {
+        _marsRoverDate.value = MarsDatePicker(day.toString(), (month + 1).toString(), year.toString())
     }
 
-    fun setDateForCalendar(day: Int, month: Int, year: Int) {
-        _marsRoverDate.value = MarsDatePicker(day, month + 1, year)
+    private fun convertStringDataToObject(date: String): MarsDatePicker {
+        val year = date.substring(0, 4)
+        val month = date.substring(5, 7)
+        val day = date.substring(8, 10)
+
+        return MarsDatePicker(day, month, year)
     }
 }

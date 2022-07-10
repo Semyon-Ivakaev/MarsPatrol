@@ -26,14 +26,15 @@ class MarsRoverPhotoViewModel(
     val marsRoverDate: LiveData<MarsDatePicker> get() = _marsRoverDate
 
     init {
-        getPhotoList()
         _marsRoverTitle.value = App.NAME_CURIOSITY
+        getDefaultPhotoList()
         initDateForCalendar()
     }
 
-    private fun getPhotoList() {
+    private fun getDefaultPhotoList() {
         viewModelScope.launch {
-            val loadResult = getDefaultMarsPhotoListUseCase.execute("424", "Perseverance")
+            val loadResult =
+                _marsRoverTitle.value?.let { getDefaultMarsPhotoListUseCase.execute("424", it) }
             when (loadResult) {
                 is ApiResponse.Success -> {
                     _marsRoverPhotos.postValue(loadResult.data)
@@ -45,9 +46,14 @@ class MarsRoverPhotoViewModel(
         }
     }
 
-    fun getNeededMarsPhotoList(roverName: String) {
+    fun getNeededMarsPhotoList() {
+        val neededDate = _marsRoverDate.value
         viewModelScope.launch {
-            val loadResult = getNeededMatsPhotoListUseCase.execute("2022-07-07", roverName = roverName)
+            val loadResult = _marsRoverTitle.value?.let {
+                getNeededMatsPhotoListUseCase.execute(
+                    "${neededDate?.year}-${neededDate?.month}-${neededDate?.day}", roverName = it
+                )
+            }
             when(loadResult) {
                 is ApiResponse.Success -> {
                     _marsRoverPhotos.postValue((loadResult.data))
@@ -68,10 +74,10 @@ class MarsRoverPhotoViewModel(
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        _marsRoverDate.value = MarsDatePicker(day, month, year)
+        _marsRoverDate.value = MarsDatePicker(day, month + 1, year)
     }
 
     fun setDateForCalendar(day: Int, month: Int, year: Int) {
-        _marsRoverDate.value = MarsDatePicker(day, month, year)
+        _marsRoverDate.value = MarsDatePicker(day, month + 1, year)
     }
 }

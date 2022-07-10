@@ -91,18 +91,20 @@ class FragmentMarsRoverPhoto: Fragment() {
         popup.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.Curiosity -> {
-                    marsRoverPhotoViewModel.getNeededMarsPhotoList(roverName = App.NAME_CURIOSITY)
+                    marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_CURIOSITY)
+                    marsRoverPhotoViewModel.getNeededMarsPhotoList()
                     showProgressBar(show = true)
                     clearRecycler()
                     setTitle(roverName = App.NAME_CURIOSITY)
-                    marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_CURIOSITY)
+
                 }
                 else -> {
-                    marsRoverPhotoViewModel.getNeededMarsPhotoList(roverName = App.NAME_PERSEVERANCE)
+                    marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_PERSEVERANCE)
+                    marsRoverPhotoViewModel.getNeededMarsPhotoList()
                     showProgressBar(show = true)
                     clearRecycler()
                     setTitle(roverName = App.NAME_PERSEVERANCE)
-                    marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_PERSEVERANCE)
+
                 }
             }
             true
@@ -148,7 +150,8 @@ class FragmentMarsRoverPhoto: Fragment() {
                 dateDialogFragment = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener{
                         _, mYear, mMonth, mDay ->
                     marsRoverPhotoViewModel.setDateForCalendar(day = mDay, month = mMonth, year = mYear)
-                }, result.year, result.month, result.day)
+                    marsRoverPhotoViewModel.getNeededMarsPhotoList()
+                }, result.year, result.month - 1, result.day)
 
         })
         dateDialogFragment?.show()

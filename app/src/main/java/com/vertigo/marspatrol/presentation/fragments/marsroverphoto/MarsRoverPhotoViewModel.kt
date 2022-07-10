@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.MarsDatePicker
 import com.vertigo.marspatrol.domain.model.MarsPhoto
-import com.vertigo.marspatrol.domain.usecase.marsphoto.GetDefaultMarsPhotoListUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetDefaultSolForMarsRoverUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetNeededMatsPhotoListUseCase
 import com.vertigo.marspatrol.presentation.App
@@ -16,7 +15,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class MarsRoverPhotoViewModel(
-    private val getDefaultMarsPhotoListUseCase: GetDefaultMarsPhotoListUseCase,
     private val getNeededMatsPhotoListUseCase: GetNeededMatsPhotoListUseCase,
     private val getDefaultSolForMarsRoverUseCase: GetDefaultSolForMarsRoverUseCase): ViewModel() {
 

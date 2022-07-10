@@ -6,6 +6,6 @@ import com.vertigo.marspatrol.domain.repository.MarsRoverPhotoRepository
 
 class GetNeededMatsPhotoListUseCase(private val marsRoverPhotoRepository: MarsRoverPhotoRepository) {
     suspend fun execute(data: String, roverName: String): ApiResponse<List<MarsPhoto>> {
-        return marsRoverPhotoRepository.getNeedPhotoList(data = data, roverName = roverName)
+        return marsRoverPhotoRepository.getNeededPhotoList(data = data, roverName = roverName)
     }
 }

@@ -15,29 +15,7 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
 
     private val retrofitApi = RetrofitInstance.marsRoverRetrofitApiService
 
-    override suspend fun getDefaultPhotoList(sol: String, roverName: String): ApiResponse<List<MarsPhoto>> {
-        val resultList = arrayListOf<MarsPhoto>()
-        try {
-            withContext(Dispatchers.Default) {
-                retrofitApi.getDefaultMarsRoverPhotos(sol = sol, roverName = roverName, key = api_key).photos.map {
-                    result -> resultList.add(
-                    MarsPhoto(
-                        sol = result.sol,
-                        earth_date = result.earth_date,
-                        camera_name = result.camera.full_name,
-                        rover_name = result.rover.name,
-                        img_url = result.img_src
-                    )
-                )
-                }
-            }
-            return ApiResponse.Success(resultList)
-        } catch (ex: Exception) {
-            return ApiResponse.Error(exception = ex)
-        }
-    }
-
-    override suspend fun getNeedPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>> {
+    override suspend fun getNeededPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>> {
         val resultList = arrayListOf<MarsPhoto>()
         try {
             withContext(Dispatchers.Default) {

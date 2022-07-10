@@ -6,9 +6,7 @@ import com.vertigo.marspatrol.domain.model.MarsRover
 
 interface MarsRoverPhotoRepository {
 
-    suspend fun getDefaultPhotoList(sol: String, roverName: String): ApiResponse<List<MarsPhoto>>
-
-    suspend fun getNeedPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>>
+    suspend fun getNeededPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>>
 
     suspend fun getDefaultSolForMarsRover(roverName: String): ApiResponse<MarsRover?>
 }

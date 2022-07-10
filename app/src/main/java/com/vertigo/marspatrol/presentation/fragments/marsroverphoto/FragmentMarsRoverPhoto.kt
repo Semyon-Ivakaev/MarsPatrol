@@ -1,5 +1,6 @@
 package com.vertigo.marspatrol.presentation.fragments.marsroverphoto
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -24,6 +25,9 @@ class FragmentMarsRoverPhoto: Fragment() {
     private lateinit var marsRoverPhotoViewModel: MarsRoverPhotoViewModel
     private lateinit var marsRoverPhotoAdapter: MarsRoverPhotoAdapter
     private lateinit var layoutManager: LinearLayoutManager
+
+    // DatePickerDialog
+    private var dateDialogFragment: DatePickerDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +74,9 @@ class FragmentMarsRoverPhoto: Fragment() {
         with(binding) {
             filterButton.setOnClickListener {
                 showPopup(filterButton)
+            }
+            calendarButton.setOnClickListener {
+                showDatePickerDialog()
             }
         }
     }
@@ -129,5 +136,21 @@ class FragmentMarsRoverPhoto: Fragment() {
         with(binding) {
             photoRecycler.layoutManager = null
         }
+    }
+
+    /**
+     * Дата для календаря теперь хранится и перезаписывается во ViewModel и при открытии DatePickerDialog
+     * сразу заполняется выбранным числом, либо числом по умолчанию при первичном открытии (сегодняшний день)
+     */
+    private fun showDatePickerDialog() {
+        marsRoverPhotoViewModel.marsRoverDate.observe(viewLifecycleOwner, {
+            result ->
+                dateDialogFragment = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener{
+                        _, mYear, mMonth, mDay ->
+                    marsRoverPhotoViewModel.setDateForCalendar(day = mDay, month = mMonth, year = mYear)
+                }, result.year, result.month, result.day)
+
+        })
+        dateDialogFragment?.show()
     }
 }

@@ -1,6 +1,5 @@
 package com.vertigo.marspatrol.presentation.fragments.marsroverphoto
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,6 @@ import com.vertigo.marspatrol.domain.usecase.marsphoto.GetDefaultSolForMarsRover
 import com.vertigo.marspatrol.domain.usecase.marsphoto.GetNeededMatsPhotoListUseCase
 import com.vertigo.marspatrol.presentation.App
 import kotlinx.coroutines.launch
-import java.util.*
 
 class MarsRoverPhotoViewModel(
     private val getNeededMatsPhotoListUseCase: GetNeededMatsPhotoListUseCase,
@@ -24,6 +22,10 @@ class MarsRoverPhotoViewModel(
     val marsRoverTitle: LiveData<String> get() = _marsRoverTitle
     private val _marsRoverDate: MutableLiveData<MarsDatePicker> = MutableLiveData()
     val marsRoverDate: LiveData<MarsDatePicker> get() = _marsRoverDate
+    private val _errorConnectionMessage: MutableLiveData<Boolean> = MutableLiveData(false)
+    val errorConnectionMessage: LiveData<Boolean> get() = _errorConnectionMessage
+    private val _emptyListMessage: MutableLiveData<Boolean> = MutableLiveData(false)
+    val emptyListMessage: LiveData<Boolean> get() = _emptyListMessage
 
     init {
         _marsRoverTitle.value = App.NAME_CURIOSITY
@@ -43,7 +45,7 @@ class MarsRoverPhotoViewModel(
                         _marsRoverDate.postValue(convertStringDataToObject(it)) }
                 }
                 is ApiResponse.Error -> {
-                    Log.e("App", "Error1")
+                    _errorConnectionMessage.value = true
                 }
             }
         }
@@ -59,10 +61,13 @@ class MarsRoverPhotoViewModel(
             }
             when(loadResult) {
                 is ApiResponse.Success -> {
-                    _marsRoverPhotos.postValue((loadResult.data))
+                    _marsRoverPhotos.postValue(loadResult.data)
+                    if (loadResult.data.isEmpty()) {
+                        _emptyListMessage.value = true
+                    }
                 }
                 is ApiResponse.Error -> {
-                    Log.e("App", "Error")
+                    _errorConnectionMessage.value = true
                 }
             }
         }

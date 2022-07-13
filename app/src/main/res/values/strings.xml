@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MarsPatrol</string>
     <string name="internet_connection_message">Failed to upload photo</string>
+    <string name="empty_list_message">No photo found on the selected day</string>
     <string name="retry_button">Retry</string>
     <string name="photoday_fragment_from">From</string>
     <string name="photoday_fragment_to">To</string>

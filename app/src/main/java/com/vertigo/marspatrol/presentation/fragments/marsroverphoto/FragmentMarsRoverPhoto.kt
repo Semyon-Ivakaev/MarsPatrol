@@ -45,12 +45,29 @@ class FragmentMarsRoverPhoto: Fragment() {
 
         marsRoverPhotoViewModel.marsRoverPhotos.observe(viewLifecycleOwner, {
             result ->
+            if (result?.isNotEmpty() == true) {
                 updateRecycler(result)
-                showProgressBar(false)
+                showProgressBar(show = false)
+                showErrorMessage(show = false, null)
+            }
         })
 
         marsRoverPhotoViewModel.marsRoverDate.observe(viewLifecycleOwner, {
             marsRoverPhotoViewModel.getNeededMarsPhotoList()
+        })
+
+        marsRoverPhotoViewModel.errorConnectionMessage.observe(viewLifecycleOwner, {
+            result ->
+                showErrorMessage(show = result, requireContext().getString(R.string.internet_connection_message))
+                clearRecycler()
+                showProgressBar(show = result)
+        })
+
+        marsRoverPhotoViewModel.emptyListMessage.observe(viewLifecycleOwner, {
+            result ->
+                showErrorMessage(show = result, requireContext().getString(R.string.empty_list_message))
+                clearRecycler()
+                showProgressBar(show = result)
         })
 
         return view
@@ -113,7 +130,6 @@ class FragmentMarsRoverPhoto: Fragment() {
                     showProgressBar(show = true)
                     clearRecycler()
                     setTitle(roverName = App.NAME_CURIOSITY)
-
                 }
                 else -> {
                     marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_PERSEVERANCE)
@@ -121,7 +137,6 @@ class FragmentMarsRoverPhoto: Fragment() {
                     showProgressBar(show = true)
                     clearRecycler()
                     setTitle(roverName = App.NAME_PERSEVERANCE)
-
                 }
             }
             true
@@ -145,7 +160,15 @@ class FragmentMarsRoverPhoto: Fragment() {
         }
     }
 
+    private fun showErrorMessage(show: Boolean, messageText: String?) {
+        with(binding) {
+            errorMessageTextview.text = messageText
+            errorMessageCardview.isVisible = show
+        }
+    }
+
     private fun showProgressBar(show: Boolean) {
+        Log.v("App", "showProgressBar $show")
         with(binding) {
             progressBar.isVisible = show
         }

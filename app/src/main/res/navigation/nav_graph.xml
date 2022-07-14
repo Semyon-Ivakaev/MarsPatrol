@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentMarsRoverPhoto">
+
+    <fragment
+        android:id="@+id/fragmentMarsRoverPhoto"
+        android:name="com.vertigo.marspatrol.presentation.fragments.marsroverphoto.FragmentMarsRoverPhoto"
+        android:label="FragmentMarsRoverPhoto" >
+        <action
+            android:id="@+id/action_fragmentMarsRoverPhoto_to_fragmentDetails"
+            app:destination="@id/fragmentDetails"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFavorites"
+        android:name="com.vertigo.marspatrol.presentation.fragments.favorites.FragmentFavorites"
+        android:label="FragmentFavorites" >
+        <action
+            android:id="@+id/action_fragmentFavorites_to_fragmentDetails"
+            app:destination="@id/fragmentDetails"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMarsSound"
+        android:name="com.vertigo.marspatrol.presentation.fragments.marssound.FragmentMarsSound"
+        android:label="FragmentMarsSound" />
+    <fragment
+        android:id="@+id/fragmentMarsTemp"
+        android:name="com.vertigo.marspatrol.presentation.fragments.marstemp.FragmentMarsTemp"
+        android:label="FragmentMarsTemp" />
+    <fragment
+        android:id="@+id/fragmentDetails"
+        android:name="com.vertigo.marspatrol.presentation.fragments.details.FragmentDetails"
+        android:label="FragmentDetails" />
+</navigation>

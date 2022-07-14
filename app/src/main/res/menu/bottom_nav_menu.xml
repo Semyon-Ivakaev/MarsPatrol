@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/fragmentMarsRoverPhoto"
+        android:title="Mars"
+        android:icon="@drawable/ic_rover_false"/>
+
+    <item android:id="@+id/fragmentMarsTemp"
+        android:title="Temp"
+        android:icon="@drawable/ic_rover_false"/>
+
+    <item android:id="@+id/fragmentMarsSound"
+        android:title="Sound"
+        android:icon="@drawable/ic_rover_false"/>
+
+    <item android:id="@+id/fragmentFavorites"
+        android:title="Fav"
+        android:icon="@drawable/ic_rover_false"/>
+</menu>

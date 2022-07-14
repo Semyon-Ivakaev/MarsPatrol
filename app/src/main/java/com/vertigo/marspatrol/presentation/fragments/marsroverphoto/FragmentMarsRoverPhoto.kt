@@ -196,4 +196,9 @@ class FragmentMarsRoverPhoto: Fragment() {
         })
         dateDialogFragment?.show()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

@@ -39,13 +39,23 @@ class FragmentDetails: Fragment() {
             photo -> setViews(photo = photo)
         })
 
+        with(binding) {
+            swipeRefresh.setOnRefreshListener {
+                setViews(photo = photo)
+                swipeRefresh.isRefreshing = false
+            }
+        }
+
         return view
     }
 
     private fun setViews(photo: MarsPhoto) {
         with(binding) {
             loadPhoto(photo.img_url, mainPhoto)
-            fullName.text = photo.
+            fullName.text = photo.camera_name
+            onePhotoDate.text = photo.earth_date
+            sol.text = photo.sol
+            author.text = photo.rover_name
         }
     }
 

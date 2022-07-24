@@ -149,13 +149,23 @@
                     app:barrierDirection="bottom"/>
 
                 <TextView
+                    android:id="@+id/sol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="2020"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/icons_barrier"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Elon Mask"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/icons_barrier"
+                    app:layout_constraintTop_toBottomOf="@id/sol"
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView

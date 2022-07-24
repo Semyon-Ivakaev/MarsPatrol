@@ -14,7 +14,7 @@
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/fragmentFavorites"
@@ -39,5 +39,8 @@
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.vertigo.marspatrol.presentation.fragments.details.FragmentDetails"
-        android:label="FragmentDetails" />
+        android:label="FragmentDetails">
+        <argument android:name="photo"
+            app:argType="com.vertigo.marspatrol.domain.model.MarsPhoto"/>
+    </fragment>
 </navigation>

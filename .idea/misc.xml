@@ -8,16 +8,14 @@
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.28307692307692306" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_calendar.xml" value="0.2601851851851852" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/ic_filter.xml" value="0.18" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/icon_rect.xml" value="0.24307692307692308" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/replay_arrow.xml" value="0.28307692307692306" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/rounded.xml" value="0.28307692307692306" />
-        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_details.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_favorites.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/drawable/star_not_select.xml" value="0.24307692307692308" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/activity_main.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_details.xml" value="0.22" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_mars_rover.xml" value="0.25" />
-        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_mars_sound.xml" value="0.23072916666666668" />
-        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_temp.xml" value="0.23072916666666668" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/item_mars_rover.xml" value="0.18" />
-        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/menu/filter_menu.xml" value="0.33" />
       </map>
     </option>

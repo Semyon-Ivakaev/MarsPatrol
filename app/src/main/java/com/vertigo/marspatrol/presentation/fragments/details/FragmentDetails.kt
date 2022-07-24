@@ -1,5 +1,6 @@
 package com.vertigo.marspatrol.presentation.fragments.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vertigo.marspatrol.databinding.FragmentDetailsBinding
@@ -52,10 +54,19 @@ class FragmentDetails: Fragment() {
     private fun setViews(photo: MarsPhoto) {
         with(binding) {
             loadPhoto(photo.img_url, mainPhoto)
+            onePhotoTitle.text = photo.rover_name
             fullName.text = photo.camera_name
             onePhotoDate.text = photo.earth_date
-            sol.text = photo.sol
+            sol.text = "Sol: ${photo.sol}"
             author.text = photo.rover_name
+
+            share.setOnClickListener {
+                sharePhoto(photo = photo)
+            }
+
+            backBtn.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -65,6 +76,18 @@ class FragmentDetails: Fragment() {
             .skipMemoryCache(true)
             .centerCrop()
             .into(imageView)
+    }
+
+    private fun sharePhoto(photo: MarsPhoto?) {
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,
+                photo?.rover_name + " " +  photo?.earth_date + " sol: " + photo?.sol
+                        + "\n" + photo?.img_url
+            )
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(shareIntent, null))
     }
 
     override fun onDestroy() {

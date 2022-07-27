@@ -8,6 +8,8 @@ data class MarsApiPhoto(
 )
 
 data class Photos(
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("sol")
     val sol: String,
     @SerializedName("earth_date")

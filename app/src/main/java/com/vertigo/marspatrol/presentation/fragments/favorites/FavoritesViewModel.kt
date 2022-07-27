@@ -17,7 +17,7 @@ class FavoritesViewModel @Inject constructor(
     private val _favoritePhotosViewModel: MutableLiveData<List<MarsPhoto>> = MutableLiveData()
     val favoritePhotosViewModel: LiveData<List<MarsPhoto>> get() = _favoritePhotosViewModel
 
-    init {
+    fun getFavoritePhotosList() {
         viewModelScope.launch {
             _favoritePhotosViewModel.postValue(getFavoriteListUseCase.execute())
         }

@@ -4,4 +4,6 @@ import com.vertigo.marspatrol.domain.model.MarsPhoto
 
 interface LocalMarsRoverPhotoRepository {
     suspend fun addToFavorites(photo: MarsPhoto)
+
+    suspend fun getAllFavoritesPhoto(): List<MarsPhoto>
 }

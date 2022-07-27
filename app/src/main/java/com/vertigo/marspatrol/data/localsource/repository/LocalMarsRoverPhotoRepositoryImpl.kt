@@ -11,4 +11,8 @@ class LocalMarsRoverPhotoRepositoryImpl @Inject constructor(
     override suspend fun addToFavorites(photo: MarsPhoto) {
         marsPhotoDao.insert(marsPhoto = photo)
     }
+
+    override suspend fun getAllFavoritesPhoto():List<MarsPhoto> {
+        return marsPhotoDao.getAllLocalPhoto()
+    }
 }

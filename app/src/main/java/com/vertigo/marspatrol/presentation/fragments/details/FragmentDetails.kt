@@ -8,13 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vertigo.marspatrol.databinding.FragmentDetailsBinding
 import com.vertigo.marspatrol.domain.model.MarsPhoto
-
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class FragmentDetails: Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null
@@ -22,7 +25,7 @@ class FragmentDetails: Fragment() {
 
     private val args: FragmentDetailsArgs by navArgs()
 
-    private lateinit var detailsViewModel: DetailsViewModel
+    private val detailsViewModel: DetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,8 +35,6 @@ class FragmentDetails: Fragment() {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
         val photo = args.photo
-
-        detailsViewModel = DetailsViewModel()
 
         detailsViewModel.setDetailPhoto(photo = photo)
 
@@ -66,6 +67,10 @@ class FragmentDetails: Fragment() {
 
             backBtn.setOnClickListener {
                 findNavController().popBackStack()
+            }
+
+            titleStar.setOnClickListener {
+                detailsViewModel.actionWithPhoto()
             }
         }
     }

@@ -8,4 +8,6 @@ interface LocalMarsRoverPhotoRepository {
     suspend fun getAllFavoritesPhoto(): List<MarsPhoto>
 
     suspend fun checkPhotoInDB(url: String): Boolean
+
+    suspend fun removeFromFavorite(photo: MarsPhoto)
 }

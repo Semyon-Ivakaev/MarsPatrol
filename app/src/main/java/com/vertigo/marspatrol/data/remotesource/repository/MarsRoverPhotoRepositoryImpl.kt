@@ -22,6 +22,7 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
                 retrofitApi.getNeededMarsRoverPhotos(roverName = roverName, earth_date = data, key = api_key).photos.map {
                     result -> resultList.add(
                     MarsPhoto(
+                        id = result.id,
                         sol = result.sol,
                         earth_date = result.earth_date,
                         camera_name = result.camera.full_name,
@@ -43,7 +44,6 @@ class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
             withContext(Dispatchers.Default) {
                 val cameraList = arrayListOf<Camera>()
                 val response = retrofitApi.getDefaultSolForMarsRover(roverName = roverName, key = api_key).rover
-                Log.v("App", response.toString())
                 response.cameras.map {
                     camera -> cameraList.add(
                         Camera(

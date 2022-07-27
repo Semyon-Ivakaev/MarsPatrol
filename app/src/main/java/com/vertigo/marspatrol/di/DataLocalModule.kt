@@ -8,6 +8,7 @@ import com.vertigo.marspatrol.data.localsource.repository.LocalMarsRoverPhotoRep
 import com.vertigo.marspatrol.domain.repository.LocalMarsRoverPhotoRepository
 import com.vertigo.marspatrol.domain.usecase.marsphoto.AddToFavoriteUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.CheckPhotoInDBUseCase
+import com.vertigo.marspatrol.domain.usecase.marsphoto.RemoveFromFavoriteUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,5 +44,10 @@ class DataLocalModule {
     @Provides
     fun provideCheckPhotoInDBUseCase(localMarsRoverPhotoRepository: LocalMarsRoverPhotoRepository): CheckPhotoInDBUseCase {
         return CheckPhotoInDBUseCase(localMarsRoverPhotoRepository = localMarsRoverPhotoRepository)
+    }
+
+    @Provides
+    fun provideRemoveFromFavoriteUseCase(localMarsRoverPhotoRepository: LocalMarsRoverPhotoRepository): RemoveFromFavoriteUseCase {
+        return RemoveFromFavoriteUseCase(localMarsRoverPhotoRepository = localMarsRoverPhotoRepository)
     }
 }

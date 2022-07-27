@@ -15,4 +15,8 @@ class LocalMarsRoverPhotoRepositoryImpl @Inject constructor(
     override suspend fun getAllFavoritesPhoto():List<MarsPhoto> {
         return marsPhotoDao.getAllLocalPhoto()
     }
+
+    override suspend fun checkPhotoInDB(url: String): Boolean {
+        return marsPhotoDao.getLocalPhoto(originalUrl = url)
+    }
 }

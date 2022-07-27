@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.vertigo.marspatrol.R
 import com.vertigo.marspatrol.databinding.FragmentDetailsBinding
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import dagger.hilt.EntryPoint
@@ -42,6 +43,10 @@ class FragmentDetails: Fragment() {
             photo -> setViews(photo = photo)
         })
 
+        detailsViewModel.photoInDB.observe(viewLifecycleOwner, {
+            result ->
+        })
+
         with(binding) {
             swipeRefresh.setOnRefreshListener {
                 setViews(photo = photo)
@@ -69,8 +74,12 @@ class FragmentDetails: Fragment() {
                 findNavController().popBackStack()
             }
 
-            titleStar.setOnClickListener {
-                detailsViewModel.actionWithPhoto()
+            titleStar.apply {
+                setStar(photo.isFavorite)
+                setOnClickListener {
+                    detailsViewModel.actionWithPhoto()
+                    setStar(photo.isFavorite)
+                }
             }
         }
     }
@@ -93,6 +102,17 @@ class FragmentDetails: Fragment() {
             type = "text/plain"
         }
         startActivity(Intent.createChooser(shareIntent, null))
+    }
+
+    private fun setStar(show: Boolean) {
+        with(binding) {
+            if (show) {
+                titleStar.setImageResource(R.drawable.star_select)
+            } else {
+                titleStar.setImageResource(R.drawable.star_not_select)
+            }
+        }
+
     }
 
     override fun onDestroy() {

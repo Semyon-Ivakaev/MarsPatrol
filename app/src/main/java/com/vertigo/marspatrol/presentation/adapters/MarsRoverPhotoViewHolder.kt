@@ -4,20 +4,29 @@ import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.vertigo.marspatrol.R
 import com.vertigo.marspatrol.databinding.ItemMarsRoverBinding
 import com.vertigo.marspatrol.domain.model.MarsPhoto
+import com.vertigo.marspatrol.presentation.fragments.favorites.FragmentFavoritesDirections
 import com.vertigo.marspatrol.presentation.fragments.marsroverphoto.FragmentMarsRoverPhotoDirections
 
 class MarsRoverPhotoViewHolder(private val binding: ItemMarsRoverBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: MarsPhoto) {
+    fun bind(item: MarsPhoto, navigationType: String) {
         with(binding) {
             loadPhoto(item.img_url, itemMarsRoverPhoto)
         }
         itemView.setOnClickListener { view ->
-            val data = FragmentMarsRoverPhotoDirections.actionFragmentMarsRoverPhotoToFragmentDetails(item)
-            view.findNavController().navigate(data)
+            when (navigationType) {
+                "FAVORITES" -> {
+                    val data = FragmentFavoritesDirections.actionFragmentFavoritesToFragmentDetails(item)
+                    view.findNavController().navigate(data)
+                }
+                "MARS_ROVER" -> {
+                    val data = FragmentMarsRoverPhotoDirections.actionFragmentMarsRoverPhotoToFragmentDetails(item)
+                    view.findNavController().navigate(data)
+                }
+            }
+
         }
     }
 

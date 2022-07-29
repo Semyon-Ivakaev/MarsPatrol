@@ -65,7 +65,7 @@ class FragmentFavorites: Fragment() {
     }
 
     private fun createRecycler() {
-        marsRoverPhotoAdapter = MarsRoverPhotoAdapter()
+        marsRoverPhotoAdapter = MarsRoverPhotoAdapter("FAVORITES")
         layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
         with(binding) {
          photoRecycler.adapter = marsRoverPhotoAdapter
@@ -76,7 +76,7 @@ class FragmentFavorites: Fragment() {
 
 
     private fun updateRecycler(updatePhotoList: List<MarsPhoto>?) {
-        marsRoverPhotoAdapter = MarsRoverPhotoAdapter()
+        marsRoverPhotoAdapter = MarsRoverPhotoAdapter("FAVORITES")
         marsRoverPhotoAdapter.submitList(updatePhotoList)
         with(binding) {
             photoRecycler.adapter = marsRoverPhotoAdapter

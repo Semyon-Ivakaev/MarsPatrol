@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vertigo.marspatrol.databinding.FragmentFavoritesBinding
 import com.vertigo.marspatrol.domain.model.MarsPhoto
+import com.vertigo.marspatrol.presentation.App
 import com.vertigo.marspatrol.presentation.adapters.MarsRoverPhotoAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -65,7 +66,7 @@ class FragmentFavorites: Fragment() {
     }
 
     private fun createRecycler() {
-        marsRoverPhotoAdapter = MarsRoverPhotoAdapter("FAVORITES")
+        marsRoverPhotoAdapter = MarsRoverPhotoAdapter(fragmentType = App.FAVORITES_TYPE)
         layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
         with(binding) {
          photoRecycler.adapter = marsRoverPhotoAdapter
@@ -76,7 +77,7 @@ class FragmentFavorites: Fragment() {
 
 
     private fun updateRecycler(updatePhotoList: List<MarsPhoto>?) {
-        marsRoverPhotoAdapter = MarsRoverPhotoAdapter("FAVORITES")
+        marsRoverPhotoAdapter = MarsRoverPhotoAdapter(fragmentType = App.FAVORITES_TYPE)
         marsRoverPhotoAdapter.submitList(updatePhotoList)
         with(binding) {
             photoRecycler.adapter = marsRoverPhotoAdapter

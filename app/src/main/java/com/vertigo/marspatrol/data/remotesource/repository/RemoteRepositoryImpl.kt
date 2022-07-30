@@ -1,16 +1,15 @@
 package com.vertigo.marspatrol.data.remotesource.repository
 
-import android.util.Log
 import com.vertigo.marspatrol.data.remotesource.api.RetrofitInstance
 import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.Camera
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import com.vertigo.marspatrol.domain.model.MarsRover
-import com.vertigo.marspatrol.domain.repository.MarsRoverPhotoRepository
+import com.vertigo.marspatrol.domain.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MarsRoverPhotoRepositoryImpl: MarsRoverPhotoRepository {
+class RemoteRepositoryImpl: RemoteRepository {
     private val api_key = "egW3m5WkZUxyaHfKxmfLdPIwHCEtjEpUoWhyzb1O"
 
     private val retrofitApi = RetrofitInstance.marsRoverRetrofitApiService

@@ -4,7 +4,7 @@ import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import com.vertigo.marspatrol.domain.model.MarsRover
 
-interface MarsRoverPhotoRepository {
+interface RemoteRepository {
 
     suspend fun getNeededPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>>
 

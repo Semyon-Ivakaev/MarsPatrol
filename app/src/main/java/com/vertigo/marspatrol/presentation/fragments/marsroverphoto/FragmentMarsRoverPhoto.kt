@@ -43,6 +43,10 @@ class FragmentMarsRoverPhoto: Fragment() {
 
         marsRoverPhotoViewModel = ViewModelProvider(this, MarsRoverViewModelFactory())[MarsRoverPhotoViewModel::class.java]
 
+        marsRoverPhotoViewModel.marsRoverTitle.observe(viewLifecycleOwner, {
+            title -> setTitle(title)
+        })
+
         marsRoverPhotoViewModel.marsRoverPhotos.observe(viewLifecycleOwner, {
             result ->
             if (result?.isNotEmpty() == true) {
@@ -74,7 +78,7 @@ class FragmentMarsRoverPhoto: Fragment() {
     }
 
     private fun createRecycler() {
-        marsRoverPhotoAdapter = MarsRoverPhotoAdapter("MARS_ROVER")
+        marsRoverPhotoAdapter = MarsRoverPhotoAdapter(fragmentType = App.MARS_ROVER_TYPE)
         layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
         with(binding) {
             photoRecycler.adapter = marsRoverPhotoAdapter
@@ -84,12 +88,18 @@ class FragmentMarsRoverPhoto: Fragment() {
     }
 
     private fun updateRecycler(updatePhotoList: List<MarsPhoto>?) {
-        marsRoverPhotoAdapter = MarsRoverPhotoAdapter("MARS_ROVER")
+        marsRoverPhotoAdapter = MarsRoverPhotoAdapter(fragmentType = App.MARS_ROVER_TYPE)
         marsRoverPhotoAdapter.submitList(updatePhotoList)
         with(binding) {
             photoRecycler.adapter = marsRoverPhotoAdapter
             photoRecycler.layoutManager = layoutManager
             photoRecycler.itemAnimator = DefaultItemAnimator()
+        }
+    }
+
+    private fun clearRecycler() {
+        with(binding) {
+            photoRecycler.layoutManager = null
         }
     }
 
@@ -129,14 +139,12 @@ class FragmentMarsRoverPhoto: Fragment() {
                     marsRoverPhotoViewModel.getNeededMarsPhotoList()
                     showProgressBar(show = true)
                     clearRecycler()
-                    setTitle(roverName = App.NAME_CURIOSITY)
                 }
                 else -> {
                     marsRoverPhotoViewModel.setMarsRoverTitle(title = App.NAME_PERSEVERANCE)
                     marsRoverPhotoViewModel.getNeededMarsPhotoList()
                     showProgressBar(show = true)
                     clearRecycler()
-                    setTitle(roverName = App.NAME_PERSEVERANCE)
                 }
             }
             true
@@ -171,12 +179,6 @@ class FragmentMarsRoverPhoto: Fragment() {
         Log.v("App", "showProgressBar $show")
         with(binding) {
             progressBar.isVisible = show
-        }
-    }
-
-    private fun clearRecycler() {
-        with(binding) {
-            photoRecycler.layoutManager = null
         }
     }
 

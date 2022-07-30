@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vertigo.marspatrol.databinding.ItemMarsRoverBinding
 import com.vertigo.marspatrol.domain.model.MarsPhoto
+import com.vertigo.marspatrol.presentation.App
 import com.vertigo.marspatrol.presentation.fragments.favorites.FragmentFavoritesDirections
 import com.vertigo.marspatrol.presentation.fragments.marsroverphoto.FragmentMarsRoverPhotoDirections
 
@@ -17,11 +18,11 @@ class MarsRoverPhotoViewHolder(private val binding: ItemMarsRoverBinding): Recyc
         }
         itemView.setOnClickListener { view ->
             when (navigationType) {
-                "FAVORITES" -> {
+                App.FAVORITES_TYPE -> {
                     val data = FragmentFavoritesDirections.actionFragmentFavoritesToFragmentDetails(item)
                     view.findNavController().navigate(data)
                 }
-                "MARS_ROVER" -> {
+                App.MARS_ROVER_TYPE -> {
                     val data = FragmentMarsRoverPhotoDirections.actionFragmentMarsRoverPhotoToFragmentDetails(item)
                     view.findNavController().navigate(data)
                 }

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.vertigo.marspatrol.data.localsource.database.MarsPhotoDao
 import com.vertigo.marspatrol.data.localsource.database.MarsPhotoDatabase
-import com.vertigo.marspatrol.data.localsource.repository.LocalMarsRoverPhotoRepositoryImpl
-import com.vertigo.marspatrol.domain.repository.LocalMarsRoverPhotoRepository
+import com.vertigo.marspatrol.data.localsource.repository.LocalRepositoryImpl
+import com.vertigo.marspatrol.domain.repository.LocalRepository
 import com.vertigo.marspatrol.domain.usecase.marsphoto.AddToFavoriteUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.CheckPhotoInDBUseCase
 import com.vertigo.marspatrol.domain.usecase.marsphoto.RemoveFromFavoriteUseCase
@@ -32,22 +32,22 @@ class DataLocalModule {
     }
 
     @Provides
-    fun provideLocalMarsRoverPhotoRepository(marsPhotoDao: MarsPhotoDao): LocalMarsRoverPhotoRepository {
-        return LocalMarsRoverPhotoRepositoryImpl(marsPhotoDao = marsPhotoDao)
+    fun provideLocalMarsRoverPhotoRepository(marsPhotoDao: MarsPhotoDao): LocalRepository {
+        return LocalRepositoryImpl(marsPhotoDao = marsPhotoDao)
     }
 
     @Provides
-    fun provideAddToFavoriteUseCase(localMarsRoverPhotoRepository: LocalMarsRoverPhotoRepository): AddToFavoriteUseCase {
-        return AddToFavoriteUseCase(localMarsRoverPhotoRepository = localMarsRoverPhotoRepository)
+    fun provideAddToFavoriteUseCase(localRepository: LocalRepository): AddToFavoriteUseCase {
+        return AddToFavoriteUseCase(localRepository = localRepository)
     }
 
     @Provides
-    fun provideCheckPhotoInDBUseCase(localMarsRoverPhotoRepository: LocalMarsRoverPhotoRepository): CheckPhotoInDBUseCase {
-        return CheckPhotoInDBUseCase(localMarsRoverPhotoRepository = localMarsRoverPhotoRepository)
+    fun provideCheckPhotoInDBUseCase(localRepository: LocalRepository): CheckPhotoInDBUseCase {
+        return CheckPhotoInDBUseCase(localRepository = localRepository)
     }
 
     @Provides
-    fun provideRemoveFromFavoriteUseCase(localMarsRoverPhotoRepository: LocalMarsRoverPhotoRepository): RemoveFromFavoriteUseCase {
-        return RemoveFromFavoriteUseCase(localMarsRoverPhotoRepository = localMarsRoverPhotoRepository)
+    fun provideRemoveFromFavoriteUseCase(localRepository: LocalRepository): RemoveFromFavoriteUseCase {
+        return RemoveFromFavoriteUseCase(localRepository = localRepository)
     }
 }

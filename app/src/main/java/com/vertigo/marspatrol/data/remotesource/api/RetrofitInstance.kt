@@ -22,7 +22,7 @@ object RetrofitInstance {
         .build()
 
     private val temperatureRetrofit = Retrofit.Builder()
-        .baseUrl("http://cab.inta-csic.es/r")
+        .baseUrl("http://cab.inta-csic.es/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

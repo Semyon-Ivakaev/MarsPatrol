@@ -1,6 +1,5 @@
 package com.vertigo.marspatrol.data.remotesource.repository
 
-import android.util.Log
 import com.vertigo.marspatrol.data.remotesource.api.RetrofitInstance
 import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.Camera
@@ -67,7 +66,7 @@ class RemoteRepositoryImpl: RemoteRepository {
     }
 
     override suspend fun getTemperature(): ApiResponse<List<MarsTemp>> {
-        var resultList = arrayListOf<MarsTemp>()
+        val resultList = arrayListOf<MarsTemp>()
         try {
             withContext(Dispatchers.Default) {
                 val response = tempRetrofitApi.getTemperature().soles
@@ -93,7 +92,6 @@ class RemoteRepositoryImpl: RemoteRepository {
                     )
                 }
             }
-            Log.v("App", resultList.toString())
             return ApiResponse.Success(data = resultList)
         } catch (ex: java.lang.Exception) {
             return ApiResponse.Error(exception = ex)

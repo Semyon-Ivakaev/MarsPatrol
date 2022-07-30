@@ -21,5 +21,13 @@ object RetrofitInstance {
         .client(client)
         .build()
 
+    private val temperatureRetrofit = Retrofit.Builder()
+        .baseUrl("http://cab.inta-csic.es/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
+
     val marsRoverRetrofitApiService: MarsRoverApiService = marsRoverRetrofit.create(MarsRoverApiService::class.java)
+
+    val temperatureRetrofitApiService: TempApiService = temperatureRetrofit.create(TempApiService::class.java)
 }

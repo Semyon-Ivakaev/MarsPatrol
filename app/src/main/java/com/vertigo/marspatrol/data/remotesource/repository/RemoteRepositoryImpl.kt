@@ -5,6 +5,7 @@ import com.vertigo.marspatrol.data.remotesource.model.ApiResponse
 import com.vertigo.marspatrol.domain.model.Camera
 import com.vertigo.marspatrol.domain.model.MarsPhoto
 import com.vertigo.marspatrol.domain.model.MarsRover
+import com.vertigo.marspatrol.domain.model.MarsTemp
 import com.vertigo.marspatrol.domain.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,6 +14,8 @@ class RemoteRepositoryImpl: RemoteRepository {
     private val api_key = "egW3m5WkZUxyaHfKxmfLdPIwHCEtjEpUoWhyzb1O"
 
     private val retrofitApi = RetrofitInstance.marsRoverRetrofitApiService
+
+    private val tempRetrofitApi = RetrofitInstance.temperatureRetrofitApiService
 
     override suspend fun getNeededPhotoList(data: String, roverName: String): ApiResponse<List<MarsPhoto>> {
         val resultList = arrayListOf<MarsPhoto>()
@@ -58,6 +61,39 @@ class RemoteRepositoryImpl: RemoteRepository {
             }
             return ApiResponse.Success(data = result)
         } catch (ex: Exception) {
+            return ApiResponse.Error(exception = ex)
+        }
+    }
+
+    override suspend fun getTemperature(): ApiResponse<List<MarsTemp>> {
+        val resultList = arrayListOf<MarsTemp>()
+        try {
+            withContext(Dispatchers.Default) {
+                val response = tempRetrofitApi.getTemperature().soles
+                for (n in 0..8) {
+                    val result = response[n]
+                    resultList.add(
+                        MarsTemp(
+                            id = result.id,
+                            earth_date = result.terrestrial_date,
+                            sol = result.sol,
+                            ls = result.ls,
+                            season = result.season,
+                            min_temp = result.min_temp,
+                            max_temp = result.max_temp,
+                            pressure = result.pressure,
+                            pressure_string = result.pressure_string,
+                            atmo_opacity = result.atmo_opacity,
+                            sunrise = result.sunrise,
+                            sunset = result.sunset,
+                            min_gts_temp = result.min_gts_temp,
+                            max_gts_temp = result.max_gts_temp
+                        )
+                    )
+                }
+            }
+            return ApiResponse.Success(data = resultList)
+        } catch (ex: java.lang.Exception) {
             return ApiResponse.Error(exception = ex)
         }
     }

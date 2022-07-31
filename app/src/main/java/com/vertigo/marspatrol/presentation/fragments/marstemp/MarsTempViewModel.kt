@@ -37,4 +37,8 @@ class MarsTempViewModel @Inject constructor(
 
         }
     }
+
+    fun setMarsMainTemp(marsTemp: MarsTemp) {
+        _marsMainTemp.value = marsTemp
+    }
 }

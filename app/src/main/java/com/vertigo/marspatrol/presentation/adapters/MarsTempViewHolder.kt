@@ -5,7 +5,8 @@ import com.vertigo.marspatrol.R
 import com.vertigo.marspatrol.databinding.ItemMarsTempBinding
 import com.vertigo.marspatrol.domain.model.MarsTemp
 
-class MarsTempViewHolder(private val binding: ItemMarsTempBinding): RecyclerView.ViewHolder(binding.root) {
+class MarsTempViewHolder(private val binding: ItemMarsTempBinding,
+                         private val setMarsTempCallBack: ((MarsTemp) -> Unit)): RecyclerView.ViewHolder(binding.root) {
     fun bind(item: MarsTemp) {
         with(binding) {
             tempData.text = item.earth_date
@@ -19,6 +20,9 @@ class MarsTempViewHolder(private val binding: ItemMarsTempBinding): RecyclerView
             when (item.atmo_opacity) {
                 "Sunny" -> itemWeatherIcon.setImageResource(R.drawable.ic_sun_weather)
                 else -> itemWeatherIcon.setImageResource(R.drawable.ic_sun_with_cloud)
+            }
+            itemView.setOnClickListener {
+                setMarsTempCallBack.invoke(item)
             }
         }
     }

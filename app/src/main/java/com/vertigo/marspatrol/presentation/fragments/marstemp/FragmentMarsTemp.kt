@@ -67,7 +67,9 @@ class FragmentMarsTemp: Fragment() {
     }
 
     private fun createRecycler() {
-        marsTempAdapter = MarsTempAdapter()
+        marsTempAdapter = MarsTempAdapter(setMarsTempCallBack = fun(temp: MarsTemp) {
+            marsTempViewModel.setMarsMainTemp(temp)
+        })
         layoutManager = GridLayoutManager(context, 1, RecyclerView.HORIZONTAL, false)
 
         with(binding) {

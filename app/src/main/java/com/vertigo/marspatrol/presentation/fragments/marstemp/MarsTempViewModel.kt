@@ -19,12 +19,16 @@ class MarsTempViewModel @Inject constructor(
     private val _marsTempList: MutableLiveData<List<MarsTemp>?> = MutableLiveData()
     val marsTempList: LiveData<List<MarsTemp>?> get() = _marsTempList
 
+    private val _marsMainTemp: MutableLiveData<MarsTemp?> = MutableLiveData()
+    val marsMainTemp: LiveData<MarsTemp?> get() = _marsMainTemp
+
     fun getMarsTempList() {
         viewModelScope.launch {
             val responseResult = getMarsTempListUseCase.execute()
             when (responseResult) {
                 is ApiResponse.Success -> {
                     _marsTempList.postValue(responseResult.data)
+                    _marsMainTemp.postValue(responseResult.data[0])
                 }
                 is ApiResponse.Error -> {
 
@@ -32,5 +36,9 @@ class MarsTempViewModel @Inject constructor(
             }
 
         }
+    }
+
+    fun setMarsMainTemp(marsTemp: MarsTemp) {
+        _marsMainTemp.value = marsTemp
     }
 }

@@ -15,7 +15,9 @@
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/activity_main.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_details.xml" value="0.22" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_mars_rover.xml" value="0.25" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/fragment_temp.xml" value="0.25" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/item_mars_rover.xml" value="0.18" />
+        <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/layout/item_mars_temp.xml" value="0.33" />
         <entry key="..\:/Users/Vertigo/Desktop/Kotlin/MarsPatrol/app/src/main/res/menu/filter_menu.xml" value="0.33" />
       </map>
     </option>
